@@ -237,8 +237,10 @@ function RagApp() {
           </Card>
 
           <div className="space-y-6">
-            <Card className="p-5">
-              <h2 className="mb-3 text-sm font-semibold text-foreground">Ask across your documents</h2>
+            <Card className="p-5 shadow-[var(--shadow-card)]">
+              <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Ask across your documents
+              </h2>
               <Textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
