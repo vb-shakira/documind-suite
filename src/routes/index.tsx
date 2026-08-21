@@ -211,7 +211,7 @@ function RagApp() {
                 );
               })}
               {docs.length === 0 && (
-                <li className="rounded-md border border-dashed border-border px-3 py-6 text-center text-xs text-muted-foreground">
+                <li className="rounded-lg border border-dashed border-border px-3 py-8 text-center text-xs text-muted-foreground">
                   No documents indexed yet
                 </li>
               )}
