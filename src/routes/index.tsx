@@ -261,20 +261,22 @@ function RagApp() {
             </Card>
 
             {answer && (
-              <Card className="p-5">
-                <h2 className="mb-3 text-sm font-semibold text-foreground">Answer</h2>
+              <Card className="border-primary/25 p-5 shadow-[var(--shadow-card)]">
+                <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                  Answer
+                </h2>
                 <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground">{answer}</p>
               </Card>
             )}
 
             {sources.length > 0 && (
-              <Card className="p-5">
-                <h2 className="mb-3 text-sm font-semibold text-foreground">
+              <Card className="p-5 shadow-[var(--shadow-card)]">
+                <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Retrieved chunks ({sources.length})
                 </h2>
                 <ul className="space-y-3">
                   {sources.map((s, i) => (
-                    <li key={s.id} className="rounded-md border border-border bg-muted/40 p-3">
+                    <li key={s.id} className="rounded-lg border border-border/70 bg-muted/40 p-3">
                       <div className="mb-1.5 flex items-center gap-2 text-xs">
                         <Badge variant="outline">[{i + 1}]</Badge>
                         <span className="truncate font-medium text-foreground">{s.metadata.source}</span>
