@@ -131,27 +131,34 @@ function RagApp() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div>
-            <h1 className="font-display text-xl font-semibold tracking-tight text-foreground">
-              Multi-Document RAG
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              LangChain loaders · ChromaDB vectors · LangGraph orchestration
-            </p>
+    <main className="min-h-screen">
+      <header className="sticky top-0 z-20 border-b border-border/70 bg-card/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+          <div className="flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15">
+              <Database className="size-4" />
+            </span>
+            <div>
+              <h1 className="font-display text-lg font-semibold tracking-tight text-foreground">
+                Multi-Document RAG
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                LangChain loaders · ChromaDB vectors · LangGraph orchestration
+              </p>
+            </div>
           </div>
-          <Badge variant="secondary" className="gap-1.5">
-            <Database className="size-3.5" />
+          <Badge variant="secondary" className="gap-1.5 rounded-full px-3 py-1 font-normal">
+            <span className="size-1.5 rounded-full bg-primary" />
             {backend ?? "ChromaDB ready"}
           </Badge>
         </div>
       </header>
 
       <div className="mx-auto max-w-6xl space-y-6 px-6 py-8">
-        <Card className="p-5">
-          <h2 className="mb-4 text-sm font-semibold text-foreground">LangGraph workflow</h2>
+        <Card className="p-5 shadow-[var(--shadow-card)]">
+          <h2 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            LangGraph workflow
+          </h2>
           <WorkflowGraph activeNode={activeNode} completed={completed} />
           {trace.length > 0 && (
             <ul className="mt-4 space-y-1 border-t border-border pt-3 font-mono text-xs text-muted-foreground">
