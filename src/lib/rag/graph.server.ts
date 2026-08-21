@@ -18,7 +18,7 @@ const IngestState = Annotation.Root({
   content: Annotation<string>,
   docs: Annotation<Document[]>({ reducer: (_, b) => b, default: () => [] }),
   chunks: Annotation<Document[]>({ reducer: (_, b) => b, default: () => [] }),
-  embeddings: Annotation<number[][]>({ reducer: (_, b) => b, default: () => [] }),
+  vectors: Annotation<number[][]>({ reducer: (_, b) => b, default: () => [] }),
   trace: Annotation<TraceEntry[]>({ reducer: (a, b) => [...a, ...b], default: () => [] }),
 });
 
@@ -48,11 +48,11 @@ const ingestGraph = new StateGraph(IngestState)
     const chunks = await splitter.splitDocuments(state.docs);
     return { chunks, trace: trace("chunking", `Split into ${chunks.length} chunks`, t) };
   })
-  .addNode("embeddings", async (state) => {
+  .addNode("embed", async (state) => {
     const t = Date.now();
     const embeddings = await embedTexts(state.chunks.map((c) => c.pageContent));
     return {
-      embeddings,
+      vectors: embeddings,
       trace: trace("embeddings", `Embedded ${embeddings.length} chunks`, t),
     };
   })
@@ -61,7 +61,7 @@ const ingestGraph = new StateGraph(IngestState)
     const records: ChunkRecord[] = state.chunks.map((chunk, i) => ({
       id: `${state.fileName}-${i}-${Math.random().toString(36).slice(2, 8)}`,
       text: chunk.pageContent,
-      embedding: state.embeddings[i] ?? [],
+      embedding: state.vectors[i] ?? [],
       metadata: { source: state.fileName, fileType: state.fileType, chunkIndex: i },
     }));
     await addChunks(state.sessionId, records);
