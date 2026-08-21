@@ -131,30 +131,37 @@ function RagApp() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div>
-            <h1 className="font-display text-xl font-semibold tracking-tight text-foreground">
-              Multi-Document RAG
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              LangChain loaders · ChromaDB vectors · LangGraph orchestration
-            </p>
+    <main className="min-h-screen">
+      <header className="sticky top-0 z-20 border-b border-border/70 bg-card/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+          <div className="flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15">
+              <Database className="size-4" />
+            </span>
+            <div>
+              <h1 className="font-display text-lg font-semibold tracking-tight text-foreground">
+                Multi-Document RAG
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                LangChain loaders · ChromaDB vectors · LangGraph orchestration
+              </p>
+            </div>
           </div>
-          <Badge variant="secondary" className="gap-1.5">
-            <Database className="size-3.5" />
+          <Badge variant="secondary" className="gap-1.5 rounded-full px-3 py-1 font-normal">
+            <span className="size-1.5 rounded-full bg-primary" />
             {backend ?? "ChromaDB ready"}
           </Badge>
         </div>
       </header>
 
       <div className="mx-auto max-w-6xl space-y-6 px-6 py-8">
-        <Card className="p-5">
-          <h2 className="mb-4 text-sm font-semibold text-foreground">LangGraph workflow</h2>
+        <Card className="p-5 shadow-[var(--shadow-card)]">
+          <h2 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            LangGraph workflow
+          </h2>
           <WorkflowGraph activeNode={activeNode} completed={completed} />
           {trace.length > 0 && (
-            <ul className="mt-4 space-y-1 border-t border-border pt-3 font-mono text-xs text-muted-foreground">
+            <ul className="mt-4 space-y-1 rounded-lg border border-border/70 bg-muted/40 p-3 font-mono text-xs text-muted-foreground">
               {trace.map((t, i) => (
                 <li key={i}>
                   <span className="text-foreground">{t.node}</span> · {t.detail} · {t.ms}ms
@@ -165,8 +172,10 @@ function RagApp() {
         </Card>
 
         <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
-          <Card className="h-fit p-5">
-            <h2 className="mb-3 text-sm font-semibold text-foreground">Documents</h2>
+          <Card className="h-fit p-5 shadow-[var(--shadow-card)]">
+            <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Documents
+            </h2>
             <input
               ref={fileInputRef}
               type="file"
@@ -191,7 +200,7 @@ function RagApp() {
                 return (
                   <li
                     key={`${doc.name}-${i}`}
-                    className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm"
+                    className="flex items-center gap-2 rounded-lg border border-border/70 bg-muted/30 px-3 py-2 text-sm transition-colors hover:bg-muted/60"
                   >
                     <Icon className="size-4 shrink-0 text-primary" />
                     <span className="truncate text-foreground">{doc.name}</span>
@@ -202,7 +211,7 @@ function RagApp() {
                 );
               })}
               {docs.length === 0 && (
-                <li className="rounded-md border border-dashed border-border px-3 py-6 text-center text-xs text-muted-foreground">
+                <li className="rounded-lg border border-dashed border-border px-3 py-8 text-center text-xs text-muted-foreground">
                   No documents indexed yet
                 </li>
               )}
@@ -228,8 +237,10 @@ function RagApp() {
           </Card>
 
           <div className="space-y-6">
-            <Card className="p-5">
-              <h2 className="mb-3 text-sm font-semibold text-foreground">Ask across your documents</h2>
+            <Card className="p-5 shadow-[var(--shadow-card)]">
+              <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Ask across your documents
+              </h2>
               <Textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
@@ -250,20 +261,22 @@ function RagApp() {
             </Card>
 
             {answer && (
-              <Card className="p-5">
-                <h2 className="mb-3 text-sm font-semibold text-foreground">Answer</h2>
+              <Card className="border-primary/25 p-5 shadow-[var(--shadow-card)]">
+                <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                  Answer
+                </h2>
                 <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground">{answer}</p>
               </Card>
             )}
 
             {sources.length > 0 && (
-              <Card className="p-5">
-                <h2 className="mb-3 text-sm font-semibold text-foreground">
+              <Card className="p-5 shadow-[var(--shadow-card)]">
+                <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Retrieved chunks ({sources.length})
                 </h2>
                 <ul className="space-y-3">
                   {sources.map((s, i) => (
-                    <li key={s.id} className="rounded-md border border-border bg-muted/40 p-3">
+                    <li key={s.id} className="rounded-lg border border-border/70 bg-muted/40 p-3">
                       <div className="mb-1.5 flex items-center gap-2 text-xs">
                         <Badge variant="outline">[{i + 1}]</Badge>
                         <span className="truncate font-medium text-foreground">{s.metadata.source}</span>

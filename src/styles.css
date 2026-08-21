@@ -98,6 +98,13 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --gradient-surface: radial-gradient(
+      120% 90% at 12% -10%,
+      oklch(0.55 0.11 198 / 0.09),
+      transparent 60%
+    ),
+    radial-gradient(90% 70% at 95% 0%, oklch(0.62 0.09 250 / 0.08), transparent 55%);
+  --shadow-card: 0 1px 2px oklch(0.22 0.03 235 / 0.04), 0 8px 24px -12px oklch(0.22 0.03 235 / 0.14);
 }
 
 .dark {
@@ -142,8 +149,11 @@
 
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-surface);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   h1,
