@@ -161,7 +161,7 @@ function RagApp() {
           </h2>
           <WorkflowGraph activeNode={activeNode} completed={completed} />
           {trace.length > 0 && (
-            <ul className="mt-4 space-y-1 border-t border-border pt-3 font-mono text-xs text-muted-foreground">
+            <ul className="mt-4 space-y-1 rounded-lg border border-border/70 bg-muted/40 p-3 font-mono text-xs text-muted-foreground">
               {trace.map((t, i) => (
                 <li key={i}>
                   <span className="text-foreground">{t.node}</span> · {t.detail} · {t.ms}ms
@@ -172,8 +172,10 @@ function RagApp() {
         </Card>
 
         <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
-          <Card className="h-fit p-5">
-            <h2 className="mb-3 text-sm font-semibold text-foreground">Documents</h2>
+          <Card className="h-fit p-5 shadow-[var(--shadow-card)]">
+            <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Documents
+            </h2>
             <input
               ref={fileInputRef}
               type="file"
