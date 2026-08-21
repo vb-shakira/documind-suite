@@ -200,7 +200,7 @@ function RagApp() {
                 return (
                   <li
                     key={`${doc.name}-${i}`}
-                    className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm"
+                    className="flex items-center gap-2 rounded-lg border border-border/70 bg-muted/30 px-3 py-2 text-sm transition-colors hover:bg-muted/60"
                   >
                     <Icon className="size-4 shrink-0 text-primary" />
                     <span className="truncate text-foreground">{doc.name}</span>
