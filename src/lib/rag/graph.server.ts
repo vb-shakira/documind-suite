@@ -69,8 +69,8 @@ const ingestGraph = new StateGraph(IngestState)
   })
   .addEdge(START, "document_loader")
   .addEdge("document_loader", "chunking")
-  .addEdge("chunking", "embeddings")
-  .addEdge("embeddings", "chromadb")
+  .addEdge("chunking", "embed")
+  .addEdge("embed", "chromadb")
   .addEdge("chromadb", END)
   .compile();
 
